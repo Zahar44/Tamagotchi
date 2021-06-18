@@ -9,11 +9,15 @@ namespace Tamagotchi
 {
     class MoveAction : IPersonAction
     {
+        public event PersonActionEventHandler ActionEvent;
+
         public void Start(int _x, int _y, GraphicProvider graphic, MoveHelper moveHelper, int delay)
         {
             var drower = graphic.GetWalkAnimation();
             var movementList = moveHelper.GetMovementList(_x, _y);
             drower.Drow(movementList[0], movementList[1], delay);
+
+            ActionEvent?.Invoke(this, new PersonActionEventArg { RequestState = PersonActionFeedback.None });
         }
     }
 }

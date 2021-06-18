@@ -39,6 +39,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,7 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EatAction.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="Heart.cs" />
     <Compile Include="IPersonAction.cs" />
     <Compile Include="MoveAction.cs" />
     <Compile Include="MoveHelper.cs" />
@@ -55,6 +58,7 @@
     <Compile Include="PersonActionFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SleepAction.cs" />
     <Compile Include="StayAction.cs" />
   </ItemGroup>
   <ItemGroup>

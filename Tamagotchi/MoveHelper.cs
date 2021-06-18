@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Tamagotchi
 {
+    [Serializable]
     class MoveHelper
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public Point Location { get; set; }
 
         public List<int>[] GetMovementList(int _x, int _y)
         {
-            var _yl = _y < Y ? GetMovementListUp(_y) : GetMovementListDown(_y);
-            var _xl = _x < X ? GetMovementListLeft(_x) : GetMovementListRight(_x);
+            var _yl = _y < Location.Y ? GetMovementListUp(_y) : GetMovementListDown(_y);
+            var _xl = _x < Location.X ? GetMovementListLeft(_x) : GetMovementListRight(_x);
             var res = Normalize(_xl, _yl);
-            X = _x; Y = _y;
+            Location = new Point(_x, _y);
 
             return res;
         }
@@ -48,7 +49,7 @@ namespace Tamagotchi
         {
             var res = new List<int>();
 
-            for (int i = Y; i >= _y; i--)
+            for (int i = Location.Y; i >= _y; i--)
             {
                 res.Add(i);
             }
@@ -60,7 +61,7 @@ namespace Tamagotchi
         {
             var res = new List<int>();
 
-            for (int i = Y; i <= _y; i++)
+            for (int i = Location.Y; i <= _y; i++)
             {
                 res.Add(i);
             }
@@ -73,7 +74,7 @@ namespace Tamagotchi
         {
             var res = new List<int>();
 
-            for (int i = X; i <= _x; i++)
+            for (int i = Location.X; i <= _x; i++)
             {
                 res.Add(i);
             }
@@ -85,7 +86,7 @@ namespace Tamagotchi
         {
             var res = new List<int>();
             
-            for (int i = X; i >= _x; i--)
+            for (int i = Location.X; i >= _x; i--)
             {
                 res.Add(i);
             }

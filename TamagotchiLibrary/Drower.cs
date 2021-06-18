@@ -8,27 +8,23 @@ namespace TamagotchiLibrary
 {
     public class Drower
     {
-        public List<List<List<String>>> Contents { get; private set; }
+        public List<List<String>> Content { get; set; }
 
-        public Drower(List<List<List<String>>> _content)
+        public Drower(List<List<String>> _content)
         {
-            Contents = _content;
+            Content = _content;
         }
 
         public void Drow(int _x, int _y, int delay)
         {
             Console.CursorVisible = false;
-            foreach (var resource in Contents)
+            foreach (var content in Content)
             {
-                foreach (var content in resource)
-                {
-                    var len = content.Max(p => p.Length);
-                    Clear(_x, _y, len, content.Count);
-                    Drow(_x, _y, content);
-                    Thread.Sleep(delay);
-                }
+                var len = content.Max(p => p.Length);
+                Clear(_x, _y, len, content.Count);
+                Drow(_x, _y, content);
+                Thread.Sleep(delay);
             }
-            Contents.Reverse();
             //Console.CursorVisible = true;
         }
 
@@ -36,21 +32,18 @@ namespace TamagotchiLibrary
         {
             Console.CursorVisible = false;
             int j = 0;
-            foreach (var resource in Contents)
+            for (int i = 1; i < _x.Count; i++)
             {
-                for (int i = 1; i < _x.Count; i++)
+                var len = Content[j].Max(p => p.Length);
+                Clear(_x[i - 1], _y[i - 1], len, Content[j].Count);
+                Drow(_x[i], _y[i], Content[j]);
+                j++;
+                if (j > Content.Count - 1)
                 {
-                    var len = resource[j].Max(p => p.Length);
-                    Clear(_x[i - 1], _y[i - 1], len, resource[j].Count);
-                    Drow(_x[i], _y[i], resource[j]);
-                    j++;
-                    if (j > resource.Count - 1)
-                    {
-                        j = Contents.Count > 1 ? 1 : 0;
-                        resource.Reverse();
-                    };
-                    Thread.Sleep(delay);
-                }
+                    j = Content.Count > 1 ? 1 : 0;
+                    Content.Reverse();
+                };
+                Thread.Sleep(delay);
             }
             //Console.CursorVisible = true;
         }
